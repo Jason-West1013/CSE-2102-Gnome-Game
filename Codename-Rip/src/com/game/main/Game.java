@@ -5,16 +5,21 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import com.game.input.InputHandler;
+
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private boolean running = false;
+	
+	int x, y = 0;
 
 	private Thread thread;
+	private InputHandler inputHandler = new InputHandler();
 
 	public static final int WIDTH = 640, HEIGHT = 480;
 
 	public Game() {
-		new Window(WIDTH, HEIGHT, "Swordman", this);
+		new Window(WIDTH, HEIGHT, "Swordman with time and stuff", this);
 
 		this.requestFocus();
 	}
@@ -58,18 +63,28 @@ public class Game extends Canvas implements Runnable {
 			frames++;
 
 			if ((System.currentTimeMillis() - timer) >= 1000) {
+				timer += 1000;
+				
 				System.out.println("UPS: " + updates + ", FPS: " + frames);
-
 				updates = 0;
 				frames = 0;
-
-				timer += 1000;
 			}
 		}
 	}
 
 	public void tick() {
-
+		if (inputHandler.keyList[0] == true) {
+			y--;
+		}
+		if (inputHandler.keyList[1] == true) {
+			x--;
+		}
+		if (inputHandler.keyList[2] == true) {
+			y++;
+		}
+		if (inputHandler.keyList[3] == true) {
+			x++;
+		}
 	}
 
 	public void render() {
@@ -84,7 +99,10 @@ public class Game extends Canvas implements Runnable {
 
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-
+		
+		g.setColor(Color.RED);
+		g.fillRect(x, y, 50, 50);
+		
 		g.dispose();
 		bs.show();
 	}
