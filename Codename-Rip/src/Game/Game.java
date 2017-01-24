@@ -8,7 +8,7 @@ public class Game extends Canvas implements Runnable {
 	public static final int WIDTH = 640, HEIGHT = 480;
 	
 	public Game() {
-		new Window(WIDTH, HEIGHT, "Swordman", this);
+		new Window(WIDTH, HEIGHT, "Not Swordman", this);
 	}
 	
 	public synchronized void start() {}
