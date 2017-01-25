@@ -1,42 +1,38 @@
 package com.game.input;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class InputHandler implements KeyListener{
-	public boolean keyList[] = new boolean[4];
+public class InputHandler extends KeyAdapter {
+	public static boolean keys[] = new boolean[4];
 	
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e){
 		if(e.getKeyCode() == KeyEvent.VK_W) {
-			keyList[0] = true;
+			keys[0] = true;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_A) {
-			keyList[1] = true;
+			keys[1] = true;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_S) {
-			keyList[2] = true;
+			keys[2] = true;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_D) {
-			keyList[3] = true;
-		}	
+			keys[3] = true;
+		}
 	}
-
+	
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_W) {
-			keyList[0] = false;
+			keys[0] = false;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_A) {
-			keyList[1] = false;
+			keys[1] = false;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_S) {
-			keyList[2] = false;
+			keys[2] = false;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_D) {
-			keyList[3] = false;
+			keys[3] = false;
 		}
-	}
-
-	public void keyTyped(KeyEvent e) {
-		
 	}
 }
