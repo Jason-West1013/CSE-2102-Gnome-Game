@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 public abstract class GameObject {
 	protected int x = 0, y = 0;
 	protected int velX = 0, velY = 0;
-	
+
 	protected ObjectID id;
 
 	public GameObject(int x, int y, ObjectID id) {
@@ -19,11 +19,11 @@ public abstract class GameObject {
 
 	public abstract void render(Graphics2D g);
 
-	public float getX() {
+	public int getX() {
 		return x;
 	}
 
-	public float getY() {
+	public int getY() {
 		return y;
 	}
 
@@ -35,11 +35,11 @@ public abstract class GameObject {
 		this.y = y;
 	}
 
-	public float getVelX() {
+	public int getVelX() {
 		return velX;
 	}
 
-	public float getVelY() {
+	public int getVelY() {
 		return velY;
 	}
 

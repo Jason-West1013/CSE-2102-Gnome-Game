@@ -12,19 +12,18 @@ import com.game.object.Player;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
-	private boolean running = false;
-	
-	private Thread thread;
-	private ObjectHandler objectHandler;
+	public static final int WIDTH = 640, HEIGHT = 480, SCALE = 2;
 
-	public static final int WIDTH = 640, HEIGHT = 480;
-	public static final int SCALE = 2;
+	private boolean running = false;
+
+	private ObjectHandler objectHandler;
+	private Thread thread;
 
 	public Game() {
-		new Window(WIDTH, HEIGHT, "Swordman with time and stuff", this);
-		
+		new Window(WIDTH, HEIGHT, "Swordman", this);
+
 		objectHandler = new ObjectHandler();
-		objectHandler.addObject(new Player(100, 100, ObjectID.PLAYER));
+		objectHandler.addObject(new Player(this.getWidth() / 2 - 16, this.getHeight() / 2 - 16, ObjectID.PLAYER));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
