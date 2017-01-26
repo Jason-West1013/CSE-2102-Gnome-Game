@@ -16,19 +16,42 @@ public abstract class GameObject {
 	}
 
 	public abstract void tick(LinkedList<GameObject> object);
+
 	public abstract void render(Graphics g);
 
-	public abstract float getX();
-	public abstract float getY();
+	public float getX() {
+		return x;
+	}
 
-	public abstract void setX(float x);
-	public abstract void setY(float y);
+	public float getY() {
+		return y;
+	}
 
-	public abstract float getVelX();
-	public abstract float getVelY();
+	public void setX(float x) {
+		this.x = x;
+	}
 
-	public abstract void setVelX(float velX);
-	public abstract void setVelY(float velY);
+	public void setY(float y) {
+		this.y = y;
+	}
 
-	public abstract ObjectID getID();
+	public float getVelX() {
+		return velX;
+	}
+
+	public float getVelY() {
+		return velY;
+	}
+
+	public void setVelX(float velX) {
+		this.velX = velX;
+	}
+
+	public void setVelY(float velY) {
+		this.velY = velY;
+	}
+
+	public ObjectID getID() {
+		return id;
+	}
 }

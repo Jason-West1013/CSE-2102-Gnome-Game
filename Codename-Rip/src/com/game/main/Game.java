@@ -10,15 +10,16 @@ import com.game.input.InputHandler;
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private boolean running = false;
-
+	private int x = 200, y = 200;
+	
 	private Thread thread;
 
-	int x = 200, y = 200;
-
 	public static final int WIDTH = 640, HEIGHT = 480;
+	public static final int SCALE = 2;
 
 	public Game() {
 		new Window(WIDTH, HEIGHT, "Swordman with time and stuff", this);
+
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
 	}
@@ -88,7 +89,6 @@ public class Game extends Canvas implements Runnable {
 			y++;
 		}
 		if (InputHandler.keys[3] == true) {
-
 			x++;
 		}
 	}
@@ -102,16 +102,13 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-
+		// START DRAWING TO SCREEN
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
 		g.setColor(Color.RED);
 		g.fillRect(x, y, 50, 50);
-
-		g.setColor(Color.RED);
-		g.fillRect(x, y, 10, 10);
-
+		// STOP DRAWING TO SCREEN
 		g.dispose();
 		bs.show();
 	}
