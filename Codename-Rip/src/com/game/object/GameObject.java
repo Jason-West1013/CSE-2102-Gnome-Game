@@ -1,23 +1,23 @@
 package com.game.object;
 
-import java.awt.Graphics;
-import java.util.LinkedList;
+import java.awt.Graphics2D;
 
 public abstract class GameObject {
-	protected float x, y;
-	protected float velX = 0, velY = 0;
+	protected int x = 0, y = 0;
+	protected int velX = 0, velY = 0;
+	
 	protected ObjectID id;
 
-	public GameObject(float x, float y, ObjectID id) {
+	public GameObject(int x, int y, ObjectID id) {
 		this.x = x;
 		this.y = y;
 
 		this.id = id;
 	}
 
-	public abstract void tick(LinkedList<GameObject> object);
+	public abstract void tick();
 
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics2D g);
 
 	public float getX() {
 		return x;
@@ -27,11 +27,11 @@ public abstract class GameObject {
 		return y;
 	}
 
-	public void setX(float x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 
-	public void setY(float y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 
@@ -43,15 +43,19 @@ public abstract class GameObject {
 		return velY;
 	}
 
-	public void setVelX(float velX) {
+	public void setVelX(int velX) {
 		this.velX = velX;
 	}
 
-	public void setVelY(float velY) {
+	public void setVelY(int velY) {
 		this.velY = velY;
 	}
 
 	public ObjectID getID() {
 		return id;
+	}
+
+	public void setID(ObjectID id) {
+		this.id = id;
 	}
 }

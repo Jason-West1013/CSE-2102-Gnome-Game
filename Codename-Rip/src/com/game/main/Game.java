@@ -2,23 +2,29 @@ package com.game.main;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import com.game.input.InputHandler;
+import com.game.object.ObjectHandler;
+import com.game.object.ObjectID;
+import com.game.object.Player;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private boolean running = false;
-	private int x = 200, y = 200;
 	
 	private Thread thread;
+	private ObjectHandler objectHandler;
 
 	public static final int WIDTH = 640, HEIGHT = 480;
 	public static final int SCALE = 2;
 
 	public Game() {
 		new Window(WIDTH, HEIGHT, "Swordman with time and stuff", this);
+		
+		objectHandler = new ObjectHandler();
+		objectHandler.addObject(new Player(100, 100, ObjectID.PLAYER));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
@@ -79,18 +85,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void tick() {
-		if (InputHandler.keys[0] == true) {
-			y--;
-		}
-		if (InputHandler.keys[1] == true) {
-			x--;
-		}
-		if (InputHandler.keys[2] == true) {
-			y++;
-		}
-		if (InputHandler.keys[3] == true) {
-			x++;
-		}
+		objectHandler.tick();
 	}
 
 	public void render() {
@@ -101,13 +96,12 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 
-		Graphics g = bs.getDrawGraphics();
+		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 		// START DRAWING TO SCREEN
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-		g.setColor(Color.RED);
-		g.fillRect(x, y, 50, 50);
+		objectHandler.render(g);
 		// STOP DRAWING TO SCREEN
 		g.dispose();
 		bs.show();
