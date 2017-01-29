@@ -3,6 +3,11 @@ package com.game.input;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+
+/**********************************************
+ * Handles key presses, contains which keys are 
+ * used within the game. 
+ **********************************************/
 public class InputHandler extends KeyAdapter {
 	public static final int W = 0;
 	public static final int S = 1;
