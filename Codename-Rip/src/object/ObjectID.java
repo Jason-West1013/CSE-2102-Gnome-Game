@@ -1,4 +1,4 @@
-package com.game.object;
+package object;
 
 public enum ObjectID {
 	PLAYER, SWORD;

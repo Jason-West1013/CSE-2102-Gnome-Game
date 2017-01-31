@@ -1,10 +1,10 @@
-package com.game.object;
+package object;
 
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 public class ObjectHandler {
-	public LinkedList<GameObject> objectList = new LinkedList<GameObject>();
+	private LinkedList<GameObject> objectList = new LinkedList<GameObject>();
 
 	public void tick() {
 		for (int i = 0; i < objectList.size(); i++) {

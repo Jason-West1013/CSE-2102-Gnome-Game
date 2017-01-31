@@ -1,14 +1,14 @@
-package com.game.main;
+package main;
 
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
-import com.game.input.InputHandler;
-import com.game.object.ObjectHandler;
-import com.game.object.ObjectID;
-import com.game.object.Player;
+import input.InputHandler;
+import object.ObjectHandler;
+import object.ObjectID;
+import object.Player;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
 		objectHandler = new ObjectHandler();
-		objectHandler.addObject(new Player(this.getWidth() / 2 - 16, this.getHeight() / 2 - 16, ObjectID.PLAYER));
+		objectHandler.addObject(new Player((this.getWidth() / 2) - 16, (this.getHeight() / 2) - 16, ObjectID.PLAYER));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
