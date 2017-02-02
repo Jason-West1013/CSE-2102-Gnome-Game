@@ -7,6 +7,8 @@ import input.InputHandler;
 import main.Game;
 
 public class Player extends GameObject {
+	boolean spacePressed = false;
+
 	public Player(int x, int y, ObjectID id) {
 		super(x, y, id);
 	}
@@ -15,11 +17,14 @@ public class Player extends GameObject {
 		velX = 0;
 		velY = 0;
 		
-		if(InputHandler.keys[InputHandler.W] == true && this.getY() >= 0) velY = -2;
-		if(InputHandler.keys[InputHandler.S] == true && this.getY() <= Game.HEIGHT - 72) velY = 2;
-		if(InputHandler.keys[InputHandler.A] == true && this.getX() >= 0) velX = -2;
-		if(InputHandler.keys[InputHandler.D] == true && this.getX() <= Game.WIDTH - 38) velX = 2;
+		if(this.getY() <= Game.HEIGHT - 71) velY = 5;
 		
+		if (InputHandler.keys[InputHandler.A] == true && this.getX() >= 0) velX = -2;
+		if (InputHandler.keys[InputHandler.D] == true && this.getX() <= Game.WIDTH - 38) velX = 2;
+		if (InputHandler.keys[InputHandler.SPACE] == true && this.getY() >= 0 && this.getY() <= Game.HEIGHT - 71) {
+			velY = -5;
+		}
+
 		x += velX;
 		y += velY;
 	}

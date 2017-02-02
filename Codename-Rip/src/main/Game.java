@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
+import graphics.SpriteSheet;
 import input.InputHandler;
 import object.ObjectHandler;
 import object.ObjectID;
@@ -100,6 +101,7 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
+		g.drawImage(SpriteSheet.tiles[0][0], 100, 100, null);
 		objectHandler.render(g);
 		// STOP DRAWING TO SCREEN
 		g.dispose();
