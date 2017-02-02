@@ -1,4 +1,4 @@
-package com.game.object;
+package Objects;
 
 import java.awt.Graphics2D;
 
@@ -7,9 +7,9 @@ import java.awt.Graphics2D;
  * game. 
  **********************************************/
 public abstract class GameObject {
-	protected int x = 0, y = 0;
-	protected int velX = 0, velY = 0;
-	protected ObjectID id;
+	protected int x = 0, y = 0; // Object's position on the screen
+	protected int velX = 0, velY = 0; // Object's speed
+	protected ObjectID id; // ID of object
 
 	public GameObject(int x, int y, ObjectID id) {
 		this.x = x;
