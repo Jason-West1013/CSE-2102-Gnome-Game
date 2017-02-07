@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-//PINK: ff009c
-//PURPLE: ff54c5
+//PINK:		ff009c
+//PURPLE:	ff54c5
 
 public class SpriteSheet {
 	public static BufferedImage[][] tiles = split(scale(load("/SpriteSheet.png"), 2), 64, 64);
@@ -30,7 +30,7 @@ public class SpriteSheet {
 
 		BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = scaledImage.createGraphics();
-		
+
 		g.drawImage(image, 0, 0, width, height, null);
 		g.dispose();
 

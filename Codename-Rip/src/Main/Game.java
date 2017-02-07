@@ -11,50 +11,51 @@ import Objects.ObjectID;
 import Objects.Player;
 import TileMap.Background;
 
-/**********************************************
- * Main game class, contains the main game loop.
- **********************************************/
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 640, HEIGHT = 480, SCALE = 2;
-	private Thread thread; // Single Thread.
-	Player _player;
+	public static final int WIDTH = 640, HEIGHT = 480;
+
+	private Thread thread;
+	private Player player;
 
 	private boolean running = false;
 
 	private ObjectHandler objectHandler;
-	Background _bg, _cloud, _moon;
+	private Background bg, cloud, moon;
 
 	public Game() {
-		_player = new Player(100, 300, ObjectID.PLAYER);
+		player = new Player(100, 300, ObjectID.PLAYER);
 		objectHandler = new ObjectHandler();
-		// Drawing all the backgrounds, should find a better way to do this. 
-		_bg = new Background("art/sky.gif", 0.3, _player);
-		_bg.setVector(-0.05,0);
-		_moon = new Background("art/Moon.gif", 0.3, _player);
-		_moon.setVector(-0.05,0);
-		_cloud = new Background("art/Clouds.gif", 1, _player);
-		_cloud.setVector(-0.1,0);
+
+		bg = new Background("/Sky.gif", 0.3, player);
+		bg.setVector(-0.05, 0);
+		moon = new Background("/Moon.gif", 0.3, player);
+		moon.setVector(-0.05, 0);
+		cloud = new Background("/Clouds.gif", 1, player);
+		cloud.setVector(-0.1, 0);
+
 		new Window(WIDTH, HEIGHT, "Swordman", this);
-		
-		// Game Additions.
-		objectHandler.addObject(_player);
+
+		objectHandler.addObject(player);
+
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
 	}
 
 	public synchronized void start() {
 		running = true;
+
 		thread = new Thread(this);
 		thread.start();
 	}
 
 	public synchronized void stop() {
 		try {
-			thread.join(); // Stops thread.
+			thread.join();
+
 			running = false;
 		} catch (InterruptedException e) {
-			e.printStackTrace(); // Run an error to the console.
+			e.printStackTrace();
 		}
 	}
 
@@ -76,57 +77,48 @@ public class Game extends Canvas implements Runnable {
 			lastTime = now;
 
 			while (delta >= 1) {
-				tick();
+				update();
 				updates++;
+
 				delta--;
 			}
-			
-			if(running)
-				render();
+
+			render();
 			frames++;
 
 			if ((System.currentTimeMillis() - timer) >= 1000) {
 				timer += 1000;
+
 				System.out.println("UPS: " + updates + ", FPS: " + frames);
 				updates = 0;
 				frames = 0;
 			}
 		}
-		stop();
 	}
 
-	/**********************************************
-	 * Updates the game. Calls object handler that renders and manipulates all
-	 * sprites.
-	 **********************************************/
-	public void tick() {
-		objectHandler.tick();
-		_bg.update();
-		_moon.update();
-		_cloud.update();
+	public void update() {
+		bg.update();
+		moon.update();
+		cloud.update();
+		objectHandler.update();
 	}
 
-	/**********************************************
-	 * Draws objects on the screen.
-	 **********************************************/
 	public void render() {
-		BufferStrategy bs = this.getBufferStrategy(); // Starts off with null. 
+		BufferStrategy bs = this.getBufferStrategy();
 
 		if (bs == null) {
-			this.createBufferStrategy(3); // Creates 3 images on top of each other. Stay under 3. 
+			this.createBufferStrategy(3);
 			return;
 		}
-
-		// Draws background on the window the screen.
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-		// START DRAWING TO SCREEN
+
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		_bg.render(g);
-		_moon.renderAlone(g);
-		_cloud.render(g);
+		// START DRAWING TO SCREEN
+		bg.render(g);
+		moon.renderAlone(g);
+		cloud.render(g);
 		objectHandler.render(g);
-
 		// STOP DRAWING TO SCREEN
 		g.dispose();
 		bs.show();

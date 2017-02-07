@@ -4,40 +4,29 @@ import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 public class ObjectHandler {
-	private LinkedList<GameObject> _objectList = new LinkedList<GameObject>();
-	
-	/*********************************************
-	 * Loops through all the objects in the game, 
-	 * updates each one individually. 
-	 *********************************************/
-	public void tick() {
-		for (int i = 0; i < _objectList.size(); i++) {
-			GameObject tempObject = _objectList.get(i);
-			tempObject.tick();
+	private LinkedList<GameObject> objectList = new LinkedList<GameObject>();
+
+	public void update() {
+		for (int i = 0; i < objectList.size(); i++) {
+			GameObject tempObject = objectList.get(i);
+
+			tempObject.update();
 		}
 	}
 
-	/*********************************************
-	 * Loops through all the objects in the game, 
-	 * renders each one individually. 
-	 *********************************************/
 	public void render(Graphics2D g) {
-		for (int i = 0; i < _objectList.size(); i++) {
-			GameObject tempObject = _objectList.get(i);
+		for (int i = 0; i < objectList.size(); i++) {
+			GameObject tempObject = objectList.get(i);
 
 			tempObject.render(g);
 		}
 	}
-	
+
 	public void addObject(GameObject object) {
-		_objectList.add(object);
+		objectList.add(object);
 	}
 
-	/*********************************************
-	 * Removes an object from the game when called, 
-	 * receives the object to be erased. 
-	 *********************************************/
 	public void removeObject(GameObject object) {
-		_objectList.remove(object);
+		objectList.remove(object);
 	}
 }
