@@ -1,15 +1,15 @@
 package Objects;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
+import Graphics.SpriteSheet;
 import Input.InputHandler;
 
 public class Player extends GameObject {
 	public static final int MAX_LEFT_TRAVEL = 40, MAX_RIGHT_TRAVEL = 340;
 
-	private int accelY = 1;
-	private boolean onGround = true;
+	private int accelY = 1, frame = 0, dir = 0;;
+	private boolean onGround = true, move = false;
 
 	public Player(int x, int y, ObjectID id) {
 		super(x, y, id);
@@ -19,14 +19,31 @@ public class Player extends GameObject {
 
 	public void update() {
 		velX = 0;
-		
+		move = false;
+
 		if (y >= 300) {
 			onGround = true;
 		}
 
-		if (InputHandler.keys[InputHandler.A] == true) this.moveLeft();
-		if (InputHandler.keys[InputHandler.D] == true) this.moveRight();
-		if (InputHandler.keys[InputHandler.SPACE] == true) this.jump();
+		if (InputHandler.keys[InputHandler.A]) {
+			this.moveLeft();
+			dir = 1;
+			move = true;
+		}
+		if (InputHandler.keys[InputHandler.D]) {
+			this.moveRight();
+			dir = 0;
+			move = true;
+		}
+		if (InputHandler.keys[InputHandler.SPACE]) {
+			this.jump();
+		}
+
+		if (move) {
+			frame++;
+		} else {
+			frame = 0;
+		}
 
 		if (!onGround) {
 			y += velY;
@@ -37,8 +54,14 @@ public class Player extends GameObject {
 	}
 
 	public void render(Graphics2D g) {
-		g.setColor(Color.RED);
-		g.fillRect(x, y, 32, 32);
+		if (!onGround) {
+			if(dir == 0) g.drawImage(SpriteSheet.playerOne[1][0], x, y, null);
+			else if(dir == 1) g.drawImage(SpriteSheet.playerTwo[1][0], x, y, null);
+		} else {
+			int stepFrame = (frame / 4) % 2;
+			if(dir == 0) g.drawImage(SpriteSheet.playerOne[stepFrame][0], x, y, null);
+			else if(dir == 1) g.drawImage(SpriteSheet.playerTwo[stepFrame][0], x, y, null);
+		}
 	}
 
 	public void moveLeft() {

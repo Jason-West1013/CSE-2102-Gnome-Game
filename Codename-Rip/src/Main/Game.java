@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 		player = new Player(100, 300, ObjectID.PLAYER);
 		objectHandler = new ObjectHandler();
-
+                                                                
 		bg = new Background("/Sky.gif", 0.3, player);
 		bg.setVector(-0.05, 0);
 		moon = new Background("/Moon.gif", 0.3, player);
