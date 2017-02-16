@@ -1,4 +1,4 @@
-package TileMap;
+package Graphics;
 
 import Main.Game;
 import Objects.Player;

@@ -5,11 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
+import Graphics.Background;
 import Input.InputHandler;
+import Objects.Map;
 import Objects.ObjectHandler;
 import Objects.ObjectID;
 import Objects.Player;
-import TileMap.Background;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -25,8 +26,9 @@ public class Game extends Canvas implements Runnable {
 
 	public Game() {
 		player = new Player(100, 300, ObjectID.PLAYER);
+
 		objectHandler = new ObjectHandler();
-                                                                
+
 		bg = new Background("/Sky.gif", 0.3, player);
 		bg.setVector(-0.05, 0);
 		moon = new Background("/Moon.gif", 0.3, player);
@@ -37,6 +39,7 @@ public class Game extends Canvas implements Runnable {
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
 		objectHandler.addObject(player);
+		objectHandler.addObject(new Map(0, 0, ObjectID.TILE));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
@@ -97,6 +100,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void update() {
+
 		bg.update();
 		moon.update();
 		cloud.update();
