@@ -22,22 +22,23 @@ public class Map extends GameObject {
 	}
 
 	public void render(Graphics2D g) {
-		for(int x = 0; x < width; x++) {
-			for(int y = 0; y < height; y++) {
-				g.drawImage(SpriteSheet.tiles[walls[x + y * width]][0], x * 64, y * 64, null);
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				g.drawImage(SpriteSheet.tiles[walls[x + y * width]][0], x * 32, y * 32, null);
 			}
 		}
 	}
 	
 	private void readTiles(BufferedImage image) {
-		int[] pixels = new int[width * height];
-		SpriteSheet.map.getRGB(0, 0, width, height, pixels, 0, 1);
+		int[] pixels = SpriteSheet.map.getRGB(0, 0, width, height, null, 0, width);
 		
-		for(int x = 0; x < width; x++) {
-			for(int y = 0; y < height; y++) {
-				int col = pixels[x + y * width] & 0xffffff;
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				int color = pixels[x + y * width] & 0xffffff;
 				
-				if(col == 0xbbbbbb) walls[x + y * width] = 1;
+				if(color == 0xffffff) walls[x + y * width] = 1;
+				
+				System.out.println(walls[x + y * width]);
 			}
 		}
 	}

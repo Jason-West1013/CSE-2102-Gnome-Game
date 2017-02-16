@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
 		objectHandler.addObject(player);
-		//objectHandler.addObject(new Map(0, 0, ObjectID.TILE));
+		objectHandler.addObject(new Map(0, 0, ObjectID.TILE));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
