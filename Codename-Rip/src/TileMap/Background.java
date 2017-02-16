@@ -11,21 +11,21 @@ import Input.InputHandler;
 
 public class Background {
 
-	private BufferedImage image;
-	private Player player;
+	private BufferedImage _image;
+	private Player _player;
 
-	private double x;
-	private double y;
-	private double dx;
-	private double dy;
+	private double _x;
+	private double _y;
+	private double _dx;
+	private double _dy;
 
 	private double moveScale;
 
 	public Background(String file, double moveScale, Player player) {
-		this.player = player;
+		_player = player;
 
 		try {
-			image = ImageIO.read(Background.class.getResource(file));
+			_image = ImageIO.read(Background.class.getResource(file));
 
 			this.moveScale = moveScale;
 		} catch (Exception e) {
@@ -34,26 +34,28 @@ public class Background {
 	}
 
 	public void setVector(double dx, double dy) {
-		this.dx = dx;
-		this.dy = dy;
+		_dx = dx;
+		_dy = dy;
 	}
 
 	public void update() {
-		x += dx;
-		y += dy;
+		_x += _dx;
+		_y += _dy;
 
-		if ((InputHandler.keys[InputHandler.A] == true) && (player.getX() == Player.MAX_LEFT_TRAVEL)) x += moveScale;
-		if ((InputHandler.keys[InputHandler.D] == true) && (player.getX() == Player.MAX_RIGHT_TRAVEL)) x -= moveScale;
+		if ((InputHandler.keys[InputHandler.A] == true) && (_player.getX() == Player.MAX_LEFT_TRAVEL)) _x += moveScale;
+		if ((InputHandler.keys[InputHandler.D] == true) && (_player.getX() == Player.MAX_RIGHT_TRAVEL)) _x -= moveScale;
 	}
 
 	public void render(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, null);
+		g.drawImage(_image, (int) _x, (int) _y, null);
 
-		if (x < 0) g.drawImage(image, (int) x + Game.WIDTH, (int) y, null);
-		if (x > 0) g.drawImage(image, (int) x - Game.WIDTH, (int) y, null);
+		if (_x < 0) 
+			g.drawImage(_image, (int) _x + Game.WIDTH, (int) _y, null);
+		if (_x > 0) 
+			g.drawImage(_image, (int) _x - Game.WIDTH, (int) _y, null);
 	}
 
 	public void renderAlone(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, null);
+		g.drawImage(_image, (int) _x, (int) _y, null);
 	}
 }
