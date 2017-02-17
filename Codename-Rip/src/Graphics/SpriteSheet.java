@@ -10,9 +10,9 @@ import javax.imageio.ImageIO;
 public class SpriteSheet {
 	public static BufferedImage[][] playerOne = split(scale(load("/SpriteSheet.png"), 2), 64, 64);
 	public static BufferedImage[][] playerTwo = mirrorSplit(scale(load("/SpriteSheet.png"), 2), 64, 64);
-	public static BufferedImage[][] tiles = split(scale(load("/Tiles.png"), 2), 64, 64);
+	//public static BufferedImage[][] tiles = split(scale(load("/Tiles.png"), 2), 64, 64);
 	
-	public static BufferedImage map = load("/Map.png");
+	//public static BufferedImage map = load("/Map.png");
 
 	public static BufferedImage load(String file) {
 		try {
