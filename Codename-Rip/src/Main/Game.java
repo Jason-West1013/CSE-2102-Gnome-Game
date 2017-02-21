@@ -7,7 +7,7 @@ import java.awt.image.BufferStrategy;
 
 import Graphics.Background;
 import Input.InputHandler;
-
+import Objects.Goblin;
 import Objects.ObjectHandler;
 import Objects.ObjectID;
 import Objects.Player;
@@ -18,6 +18,7 @@ public class Game extends Canvas implements Runnable {
 
 	private Thread thread;
 	private Player player;
+	private Goblin goblin;
 
 	private boolean running = false;
 
@@ -26,6 +27,7 @@ public class Game extends Canvas implements Runnable {
 
 	public Game() {
 		player = new Player(100, 300, ObjectID.PLAYER);
+		goblin = new Goblin(200, 300, ObjectID.GOBLIN);
 
 		objectHandler = new ObjectHandler();
 
@@ -39,6 +41,7 @@ public class Game extends Canvas implements Runnable {
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
 		objectHandler.addObject(player);
+		objectHandler.addObject(goblin);
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
