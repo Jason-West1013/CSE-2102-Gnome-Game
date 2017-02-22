@@ -10,6 +10,8 @@ public class Player extends GameObject {
 
 	private int accelY = 1, frame = 0, dir = 0;
 	private boolean onGround = true, move = false;
+	
+	public static boolean collision = false;
 
 	public Player(int x, int y, ObjectID id) {
 		super(x, y, id);
