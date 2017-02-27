@@ -9,51 +9,73 @@ import javax.imageio.ImageIO;
 
 import Input.InputHandler;
 
+/**********************************************************
+ * Draws a background image. Can be scrolled based on the
+ * player's position or can scroll automatically. 
+ **********************************************************/
 public class Background {
 
-	private BufferedImage image;
-	private Player player;
+	private BufferedImage _image;
+	private Player _player;
 
-	private double x;
-	private double y;
-	private double dx;
-	private double dy;
+	// Scrolling speed
+	private double _x;
+	private double _y;
+	
+	// Automatic scroll speed.
+	private double _dx; 
+	private double _dy;
 
-	private double moveScale;
+	private double _moveScale;
 
 	public Background(String file, double moveScale, Player player) {
-		this.player = player;
-
 		try {
-			image = ImageIO.read(Background.class.getResource(file));
-
-			this.moveScale = moveScale;
+			_image = ImageIO.read(Background.class.getResource(file)); 
+			_moveScale = moveScale;
+			_player = player;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void setVector(double dx, double dy) {
-		this.dx = dx;
-		this.dy = dy;
+	/**********************************************************
+	 * Sets the speed at which the background image will scroll 
+	 * across the screen. 
+	 **********************************************************/
+	public void setAutoScroll(double dx, double dy) {
+		_dx = dx;
+		_dy = dy;
 	}
 
+	/**********************************************************
+	 * Updates the image so it can be scrolled. 
+	 **********************************************************/
 	public void update() {
-		x += dx;
-		y += dy;
+		_x += _dx;
+		_y += _dy;
 
-		if ((InputHandler.keys[InputHandler.A] == true) && (player.getX() == Player.MAX_LEFT_TRAVEL)) x += moveScale;
-		if ((InputHandler.keys[InputHandler.D] == true) && (player.getX() == Player.MAX_RIGHT_TRAVEL)) x -= moveScale;
+		if ((InputHandler.keys[InputHandler.A] == true) && (_player.getX() == Player.MAX_LEFT_TRAVEL)) _x += _moveScale;
+		if ((InputHandler.keys[InputHandler.D] == true) && (_player.getX() == Player.MAX_RIGHT_TRAVEL)) _x -= _moveScale;
 	}
 
+	/**********************************************************
+	 * Draws the image on the screen. If the screen is moved in 
+	 * any direction in the x-axis it draws another image next 
+	 * to the current. 
+	 * 
+	 *     !! Only draws one image on each side currently!!
+	 **********************************************************/
 	public void render(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, null);
+		g.drawImage(_image, (int) _x, (int) _y, null);
 
-		if (x < 0) g.drawImage(image, (int) x + Game.WIDTH, (int) y, null);
-		if (x > 0) g.drawImage(image, (int) x - Game.WIDTH, (int) y, null);
+		if (_x < 0) g.drawImage(_image, (int) _x + Game.WIDTH, (int) _y, null);
+		if (_x > 0) g.drawImage(_image, (int) _x - Game.WIDTH, (int) _y, null);
 	}
 
+	/**********************************************************
+	 * Used to render an image and not duplicate it to the sides.
+	 **********************************************************/
 	public void renderAlone(Graphics2D g) {
-		g.drawImage(image, (int) x, (int) y, null);
+		g.drawImage(_image, (int) _x, (int) _y, null);
 	}
 }
