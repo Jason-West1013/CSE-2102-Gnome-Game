@@ -3,7 +3,8 @@ package Objects;
 import java.awt.Graphics2D;
 
 public abstract class GameObject {
-	protected int x = 0, y = 0;
+	protected int x = 0;
+	protected int y = 0;
 	protected int velX = 0, velY = 0;
 
 	protected ObjectID id;

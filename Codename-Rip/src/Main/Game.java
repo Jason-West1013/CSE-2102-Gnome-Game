@@ -23,12 +23,11 @@ public class Game extends Canvas implements Runnable {
 
 	private boolean running = false;
 
-	private ObjectHandler objectHandler;
+	public static ObjectHandler objectHandler;
 	private Background bg, cloud, moon;
 
 	public Game() {
-		player = new Player(100, 300, ObjectID.PLAYER);
-		goblin = new Goblin(200, 300, ObjectID.GOBLIN);
+		player = new Player(100, 320, ObjectID.PLAYER);
 
 		objectHandler = new ObjectHandler();
 
@@ -41,9 +40,8 @@ public class Game extends Canvas implements Runnable {
 
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
+		objectHandler.addObject(new Map(0, 0, ObjectID.MAP, player));
 		objectHandler.addObject(player);
-		objectHandler.addObject(goblin);
-		objectHandler.addObject(new Map(0, 0, ObjectID.MAP));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
@@ -104,7 +102,6 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void update() {
-
 		bg.update();
 		moon.update();
 		cloud.update();

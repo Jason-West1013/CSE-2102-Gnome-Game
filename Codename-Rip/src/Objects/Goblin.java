@@ -22,13 +22,13 @@ public class Goblin extends GameObject {
 		move = false;
 		velX = 0;
 
-		if (y >= 300) {
+		if (y >= 320) {
 			onGround = true;
 		}
 
-		if (InputHandler.keys[InputHandler.A]) this.moveRight();
-		if (InputHandler.keys[InputHandler.D]) this.moveLeft();
-		if (InputHandler.keys[InputHandler.SPACE]) this.jump();
+		//if (InputHandler.keys[InputHandler.A]) this.moveRight();
+		//if (InputHandler.keys[InputHandler.D]) this.moveLeft();
+		//if (InputHandler.keys[InputHandler.SPACE]) this.jump();
 
 		if (move) {
 			frame++;

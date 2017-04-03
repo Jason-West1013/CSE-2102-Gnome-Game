@@ -1,8 +1,7 @@
 package Objects;
 
 import java.awt.Graphics2D;
-
-import Graphics.SpriteSheet;
+import java.awt.Rectangle;
 
 public class Tile extends GameObject {
 
@@ -17,17 +16,14 @@ public class Tile extends GameObject {
 	public void update() {
 		detectCollision(player, this);
 	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, 64,64);
+	}
 
 	public void render(Graphics2D g) {
-		g.drawImage(SpriteSheet.tiles[1][0], x, y, null);
 	}
 
 	public void detectCollision(Player player, Tile tile) {
-		if (player.getX() < tile.getX() + 32 && player.getX() + 64 > tile.getX() && player.getY() < tile.getY() + 32
-				&& player.getY() + 71 > tile.getY()) {
-			Player.collision = true;
-		} else {
-			Player.collision = false;
-		}
 	}
 }
