@@ -8,7 +8,7 @@ import Graphics.SpriteSheet;
 import Input.InputHandler;
 
 public class Player extends GameObject {
-	public static final int MAX_LEFT_TRAVEL = -20, MAX_RIGHT_TRAVEL = 260, WIDTH = 32, HEIGHT = 32;
+	public static final int MAX_LEFT_TRAVEL = -20, MAX_RIGHT_TRAVEL = 585, WIDTH = 32, HEIGHT = 32;
 
 	private int accelY = 1, frame = 0, dir = 0, _health = 100, _lifes = 3; // Added health
 	private boolean onGround = true, move = false;

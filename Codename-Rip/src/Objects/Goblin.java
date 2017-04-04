@@ -7,7 +7,7 @@ import Graphics.SpriteSheet;
 import Input.InputHandler;
 
 public class Goblin extends GameObject {
-	public static final int MAX_LEFT_TRAVEL = 40, MAX_RIGHT_TRAVEL = 200, WIDTH = 5, HEIGHT = 32;
+	public static final int MAX_LEFT_TRAVEL = 40, MAX_RIGHT_TRAVEL = 520, WIDTH = 5, HEIGHT = 32;
 
 	private int accelY = 1, frame = 0, dir = 0;
 	private boolean onGround = true, move = false;
