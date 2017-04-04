@@ -59,6 +59,7 @@ public class Player extends GameObject {
 		}
 	}
 
+	// Perhaps change so he only jumps once when the button is hit instead of repeatly jumping?
 	private void jump() {
 		if (onGround) {
 			velY = -15;

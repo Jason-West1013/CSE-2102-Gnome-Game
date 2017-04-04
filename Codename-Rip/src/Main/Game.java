@@ -30,11 +30,11 @@ public class Game extends Canvas implements Runnable {
 		objectHandler = new ObjectHandler();
 
 		bg = new Background("/Sky.gif", 0.3, player);
-		bg.setVector(-0.05, 0);
+		bg.setAutoScroll(-0.05, 0);
 		moon = new Background("/Moon.gif", 0.3, player);
-		moon.setVector(-0.05, 0);
+		moon.setAutoScroll(-0.05, 0);
 		cloud = new Background("/Clouds.gif", 1, player);
-		cloud.setVector(-0.1, 0);
+		cloud.setAutoScroll(-0.1, 0);
 
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
@@ -47,7 +47,6 @@ public class Game extends Canvas implements Runnable {
 
 	public synchronized void start() {
 		running = true;
-
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -55,7 +54,6 @@ public class Game extends Canvas implements Runnable {
 	public synchronized void stop() {
 		try {
 			thread.join();
-
 			running = false;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
