@@ -2,20 +2,34 @@ package View;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import Main.Game;
-
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class GameMainMenu extends JFrame {
+
+
+	
+	private static final long serialVersionUID = -1261111441057550890L;
+	
+	private JPanel contentPane;
+	
+	private JLabel lblTitle;
+	
+	private JButton btnNewGame;
+	private JButton btnOptions;
+	private JButton btnHelp;
+	private JButton btnAbout;
+	private JButton btnExit;
+	/**
+	 * Launch the application.
+	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
@@ -24,6 +38,7 @@ public class GameMainMenu extends JFrame {
 			public void run() {
 				try {
 					GameMainMenu frame = new GameMainMenu();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,49 +61,62 @@ public class GameMainMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(6, 1));
 
-		JLabel lblSwordman = new JLabel("SwordMan");
-		lblSwordman.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblSwordman);
+		lblTitle = new JLabel("SwordMan");
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblTitle);
 
-		JButton btnNewGame = new JButton("New Game");
+		btnNewGame = new JButton("New Game");
+		contentPane.add(btnNewGame);
+
+		btnOptions = new JButton("Options");
+		contentPane.add(btnOptions);
+
+		btnHelp = new JButton("Help");		
+		contentPane.add(btnHelp);
+
+		btnAbout = new JButton("About");		
+		contentPane.add(btnAbout);
+
+		btnExit = new JButton("Exit");		
+		contentPane.add(btnExit);
+	}
+
+	private void createEvents() {
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Game();
 				dispose();
 			}
 		});
-		contentPane.add(btnNewGame);
-
-		JButton btnOptions = new JButton("Options");
+		
 		btnOptions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFrame optionMenu = new OptionMenu();
+				optionMenu.setLocationRelativeTo(null);
 			}
 		});
-		contentPane.add(btnOptions);
-
-		JButton btnHelp = new JButton("Help");
+		
 		btnHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		contentPane.add(btnHelp);
-
-		JButton btnAbout = new JButton("About");
+		
 		btnAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		contentPane.add(btnAbout);
-
-		JButton btnExit = new JButton("Exit");
+		
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
+		});			
+
 		});
 		contentPane.add(btnExit);
 	}
 
 	private void createEvents() {
+
 	}
 }
