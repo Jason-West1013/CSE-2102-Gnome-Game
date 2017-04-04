@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Main.Game;
 import Main.Window;
 
 public class InGameOptionMenu extends JFrame{
@@ -61,11 +60,8 @@ public class InGameOptionMenu extends JFrame{
 		
 		btnResume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//setVisible(false);
 				dispose();
 			}
 		});
 	}
-	
-
 }

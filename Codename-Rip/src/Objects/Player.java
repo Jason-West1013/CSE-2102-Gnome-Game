@@ -4,21 +4,24 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import GameState.GameStateManager;
-import Graphics.SpriteSheet;
 import Input.InputHandler;
 
 public class Player extends GameObject {
-	public static final int MAX_LEFT_TRAVEL = -20, MAX_RIGHT_TRAVEL = 585, WIDTH = 32, HEIGHT = 32;
+	public static final int MAX_LEFT_TRAVEL = 0, MAX_RIGHT_TRAVEL = 601, WIDTH = 32, HEIGHT = 32;
 
 	private int accelY = 1;
-	public boolean onGround = true;
+	private boolean onGround = true, shifted = false;
+	
+	ObjectHandler objectHandler;
+	PresentMap presentMap;
+	PastMap pastMap;
 
-	public Player(int x, int y, ObjectID id) {
+	public Player(int x, int y, ObjectID id, ObjectHandler objectHandler, PresentMap presentMap, PastMap pastMap) {
 		super(x, y, id);
 		
-		velX = 0;
-		velY = 0;
+		this.objectHandler = objectHandler;
+		this.presentMap = presentMap;
+		this.pastMap = pastMap;
 	}
 
 	public void update() {
@@ -29,6 +32,7 @@ public class Player extends GameObject {
 		if (InputHandler.keys[InputHandler.A]) this.moveLeft();
 		if (InputHandler.keys[InputHandler.D]) this.moveRight();
 		if (InputHandler.keys[InputHandler.SPACE]) this.jump();
+		if (InputHandler.keys[InputHandler.SHIFT]) this.shift();
 
 		if (!onGround) {
 			y += velY;
@@ -40,11 +44,11 @@ public class Player extends GameObject {
 
 	public void render(Graphics2D g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(x, y, 32, 32);
+		g.fillRect(x, y, WIDTH, HEIGHT);
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 32, 32);
+		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 
 	private void moveLeft() {
@@ -67,6 +71,36 @@ public class Player extends GameObject {
 		if (onGround) {
 			velY = -10;
 			onGround = false;
+		}
+	}
+	
+	private void shift() {
+		if(!shifted) {
+			shifted = true;
+		} else {
+			shifted = false;
+		}
+		
+		if(!shifted) {
+			for(int i = 0; i < objectHandler.objectList.size(); i++) {
+				GameObject tempObject = objectHandler.objectList.get(i);
+				
+				if(tempObject.getID() == ObjectID.PRESENT_MAP) {
+					objectHandler.removeObject(tempObject);
+				}
+			}
+			
+			objectHandler.addObject(pastMap);
+		} else {
+			for(int i = 0; i < objectHandler.objectList.size(); i++) {
+				GameObject tempObject = objectHandler.objectList.get(i);
+				
+				if(tempObject.getID() == ObjectID.PAST_MAP) {
+					objectHandler.removeObject(tempObject);
+				}
+			}
+			
+			objectHandler.addObject(presentMap);
 		}
 	}
 }

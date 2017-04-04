@@ -111,17 +111,6 @@ public class Goblin extends GameObject {
 		move = false;
 		velX = 0;
 	}
-
-	private void jump() {
-		if (onGround) {
-			velY = -10;
-			onGround = false;
-		}
-	}
-	
-	private Rectangle getBounds() {
-		return new Rectangle(x + 15, y, WIDTH, HEIGHT);
-	}
 	
 	public void goblinAI() {
 		if(getX() == MAX_LEFT_TRAVEL && _player.getX() < getX() || getX() == MAX_RIGHT_TRAVEL && 
