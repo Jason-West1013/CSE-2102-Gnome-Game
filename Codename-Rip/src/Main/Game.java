@@ -44,7 +44,7 @@ public class Game extends Canvas implements Runnable{
 		objectHandler = new ObjectHandler();
 
 		bg = new Background("/Sky.gif");
-		bg.setAutoScroll(-0.05, 0);
+		bg.setAutoScroll(-0.5, 0);
 		moon = new Background("/Moon.gif");
 		cloud = new Background("/Clouds.gif");
 		cloud.setAutoScroll(-0.1, 0);
