@@ -4,6 +4,11 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 import java.awt.image.BufferStrategy;
 
 import GameState.GameStateManager;
@@ -14,9 +19,9 @@ import Objects.Map;
 import Objects.ObjectHandler;
 import Objects.ObjectID;
 import Objects.Player;
+import View.InGameOptionMenu;
 
-public class Game extends Canvas implements Runnable {
-	private static final long serialVersionUID = 1L;
+public class Game extends Canvas implements Runnable{
 	public static final int WIDTH = 640, HEIGHT = 480;
 
 	private Thread thread;
@@ -28,6 +33,8 @@ public class Game extends Canvas implements Runnable {
 
 	private ObjectHandler objectHandler;
 	private Background bg, cloud, moon;
+	
+	
 
 	public Game() {
 		gameState = new GameStateManager();
@@ -51,7 +58,8 @@ public class Game extends Canvas implements Runnable {
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
-	}
+		
+	}	
 
 	public synchronized void start() {
 		running = true;
@@ -131,9 +139,5 @@ public class Game extends Canvas implements Runnable {
 		// STOP DRAWING TO SCREEN
 		g.dispose();
 		bs.show();
-	}
-
-	public static void main(String[] args) {
-		new Game();
 	}
 }
