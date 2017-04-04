@@ -54,8 +54,8 @@ public class Background {
 		_x += _dx;
 		_y += _dy;
 
-		if ((InputHandler.keys[InputHandler.A] == true) && (_player.getX() == Player.MAX_LEFT_TRAVEL)) _x += _moveScale;
-		if ((InputHandler.keys[InputHandler.D] == true) && (_player.getX() == Player.MAX_RIGHT_TRAVEL)) _x -= _moveScale;
+		if ((InputHandler.keys[InputHandler.A] == true) && (_player.getX() <= Player.MAX_LEFT_TRAVEL)) _x += _moveScale;
+		if ((InputHandler.keys[InputHandler.D] == true) && (_player.getX() >= Player.MAX_RIGHT_TRAVEL)) _x -= _moveScale;
 	}
 
 	/**********************************************************

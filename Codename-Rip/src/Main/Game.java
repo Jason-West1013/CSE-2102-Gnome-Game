@@ -3,8 +3,10 @@ package Main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 
+import GameState.GameStateManager;
 import Graphics.Background;
 import Input.InputHandler;
 import Objects.Goblin;
@@ -20,6 +22,7 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private Player player;
 	private Goblin goblin;
+	private GameStateManager gameState;
 
 	private boolean running = false;
 
@@ -27,14 +30,15 @@ public class Game extends Canvas implements Runnable {
 	private Background bg, cloud, moon;
 
 	public Game() {
-		player = new Player(100, 300, ObjectID.PLAYER);
-		goblin = new Goblin(200, 300, ObjectID.GOBLIN);
+		gameState = new GameStateManager();
+		player = new Player(100, 300, ObjectID.PLAYER, gameState);
+		goblin = new Goblin(200, 300, ObjectID.GOBLIN, player);
 
 		objectHandler = new ObjectHandler();
 
-		bg = new Background("/Sky.gif", 0.3, player);
+		bg = new Background("/Sky.gif", 0.05, player);
 		bg.setAutoScroll(-0.05, 0);
-		moon = new Background("/Moon.gif", 0.3, player);
+		moon = new Background("/Moon.gif", 0.05, player);
 		moon.setAutoScroll(-0.05, 0);
 		cloud = new Background("/Clouds.gif", 1, player);
 		cloud.setAutoScroll(-0.1, 0);
@@ -43,7 +47,7 @@ public class Game extends Canvas implements Runnable {
 
 		objectHandler.addObject(player);
 		objectHandler.addObject(goblin);
-		objectHandler.addObject(new Map(0, 0, ObjectID.MAP));
+		//objectHandler.addObject(new Map(0, 0, ObjectID.MAP));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
@@ -102,7 +106,6 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void update() {
-
 		bg.update();
 		moon.update();
 		cloud.update();
