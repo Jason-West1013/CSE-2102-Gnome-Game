@@ -12,7 +12,8 @@ import java.awt.image.BufferStrategy;
 
 import Graphics.Background;
 import Input.InputHandler;
-
+import Objects.Goblin;
+import Objects.Map;
 import Objects.ObjectHandler;
 import Objects.ObjectID;
 import Objects.Player;
@@ -23,6 +24,7 @@ public class Game extends Canvas implements Runnable{
 
 	private Thread thread;
 	private Player player;
+	private Goblin goblin;
 
 	private boolean running = false;
 
@@ -33,19 +35,22 @@ public class Game extends Canvas implements Runnable{
 
 	public Game() {
 		player = new Player(100, 300, ObjectID.PLAYER);
+		goblin = new Goblin(200, 300, ObjectID.GOBLIN);
 
 		objectHandler = new ObjectHandler();
 
 		bg = new Background("/Sky.gif", 0.3, player);
-		bg.setVector(-0.05, 0);
+		bg.setAutoScroll(-0.05, 0);
 		moon = new Background("/Moon.gif", 0.3, player);
-		moon.setVector(-0.05, 0);
+		moon.setAutoScroll(-0.05, 0);
 		cloud = new Background("/Clouds.gif", 1, player);
-		cloud.setVector(-0.1, 0);
+		cloud.setAutoScroll(-0.1, 0);
 
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
 		objectHandler.addObject(player);
+		objectHandler.addObject(goblin);
+		objectHandler.addObject(new Map(0, 0, ObjectID.MAP));
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
@@ -54,7 +59,6 @@ public class Game extends Canvas implements Runnable{
 
 	public synchronized void start() {
 		running = true;
-
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -62,7 +66,6 @@ public class Game extends Canvas implements Runnable{
 	public synchronized void stop() {
 		try {
 			thread.join();
-
 			running = false;
 		} catch (InterruptedException e) {
 			e.printStackTrace();

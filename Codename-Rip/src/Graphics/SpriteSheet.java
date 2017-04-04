@@ -6,13 +6,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-
 public class SpriteSheet {
 	public static BufferedImage[][] playerOne = split(scale(load("/SpriteSheet.png"), 2), 64, 64);
 	public static BufferedImage[][] playerTwo = mirrorSplit(scale(load("/SpriteSheet.png"), 2), 64, 64);
-	//public static BufferedImage[][] tiles = split(scale(load("/Tiles.png"), 2), 64, 64);
+	public static BufferedImage[][] tiles = split(scale(load("/Tiles.png"), 2), 64, 64);
 	
-	//public static BufferedImage map = load("/Map.png");
+	public static BufferedImage map = load("/Map.png");
 
 	public static BufferedImage load(String file) {
 		try {
@@ -52,20 +51,20 @@ public class SpriteSheet {
 		}
 		return spriteList;
 	}
-	
+
 	public static BufferedImage[][] mirrorSplit(BufferedImage image, int xSize, int ySize) {
 		int xSlices = image.getWidth() / xSize;
 		int ySlices = image.getHeight() / ySize;
-		
+
 		BufferedImage[][] spriteList = new BufferedImage[xSlices][ySlices];
-		
-		for(int x = 0; x < xSlices; x++) {
-			for(int y = 0; y < ySlices; y++) {
-                spriteList[x][y] = new BufferedImage(xSize, ySize, BufferedImage.TYPE_INT_ARGB);
-                Graphics2D g = spriteList[x][y].createGraphics();
-                
-                g.drawImage(image, xSize, 0, 0, ySize, x * xSize, y * ySize, (x + 1) * xSize, (y + 1) * ySize, null);
-                g.dispose();
+
+		for (int x = 0; x < xSlices; x++) {
+			for (int y = 0; y < ySlices; y++) {
+				spriteList[x][y] = new BufferedImage(xSize, ySize, BufferedImage.TYPE_INT_ARGB);
+				Graphics2D g = spriteList[x][y].createGraphics();
+
+				g.drawImage(image, xSize, 0, 0, ySize, x * xSize, y * ySize, (x + 1) * xSize, (y + 1) * ySize, null);
+				g.dispose();
 			}
 		}
 		return spriteList;

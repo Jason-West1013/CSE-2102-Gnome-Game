@@ -1,6 +1,5 @@
 package View;
 
-
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
@@ -14,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class GameMainMenu extends JFrame {
+
 
 	
 	private static final long serialVersionUID = -1261111441057550890L;
@@ -30,6 +30,9 @@ public class GameMainMenu extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,9 +47,6 @@ public class GameMainMenu extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public GameMainMenu() {
 		setResizable(false);
 		initComponents();
@@ -111,5 +111,12 @@ public class GameMainMenu extends JFrame {
 				System.exit(0);
 			}
 		});			
+
+		});
+		contentPane.add(btnExit);
+	}
+
+	private void createEvents() {
+
 	}
 }

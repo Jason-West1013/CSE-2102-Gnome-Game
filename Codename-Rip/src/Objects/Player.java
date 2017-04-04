@@ -10,6 +10,8 @@ public class Player extends GameObject {
 
 	private int accelY = 1, frame = 0, dir = 0;
 	private boolean onGround = true, move = false;
+	
+	public static boolean collision = false;
 
 	public Player(int x, int y, ObjectID id) {
 		super(x, y, id);
@@ -78,6 +80,7 @@ public class Player extends GameObject {
 		}
 	}
 
+	// Perhaps change so he only jumps once when the button is hit instead of repeatly jumping?
 	private void jump() {
 		if (onGround) {
 			velY = -10;
