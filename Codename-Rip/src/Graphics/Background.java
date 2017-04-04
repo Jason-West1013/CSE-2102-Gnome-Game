@@ -75,13 +75,10 @@ public class Background {
 	 **********************************************************/
 	public void render(Graphics2D g) {
 		g.drawImage(_image, (int) _x, (int) _y, null);
-
-		//if (_x < 0) g.drawImage(_image, (int) _x + Game.WIDTH, (int) _y, null);
-		//if (_x > 0) g.drawImage(_image, (int) _x - Game.WIDTH, (int) _y, null);
-		System.out.println(_x % Game.WIDTH);
-		if(_x < 0 || _x % (Game.WIDTH - 20) == 0)
-			System.out.println("Draw It!!");
-			g.drawImage(_image, (int) _x + Game.WIDTH, (int) _y, null);
+		
+		if (_x < 0) g.drawImage(_image, (int) _x + Game.WIDTH, (int) _y, null);
+		if (_x > 0) g.drawImage(_image, (int) _x - Game.WIDTH, (int) _y, null);
+		
 	}
 
 	/**********************************************************
