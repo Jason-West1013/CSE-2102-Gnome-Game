@@ -11,34 +11,39 @@ public class Player extends GameObject {
 
 	private int accelY = 1;
 	private boolean onGround = true, shifted = false;
-	
-	ObjectHandler objectHandler;
-	PresentMap presentMap;
-	PastMap pastMap;
 
-	public Player(int x, int y, ObjectID id, ObjectHandler objectHandler, PresentMap presentMap, PastMap pastMap) {
+	private ObjectHandler objectHandler;
+	private PastMap pastMap;
+	private PresentMap presentMap;
+
+	public Player(int x, int y, ObjectID id, ObjectHandler objectHandler, PastMap pastMap, PresentMap presentMap) {
 		super(x, y, id);
-		
+
 		this.objectHandler = objectHandler;
-		this.presentMap = presentMap;
 		this.pastMap = pastMap;
+		this.presentMap = presentMap;
 	}
 
 	public void update() {
 		velX = 0;
-		
-		if( y >= 344) onGround = true;
-		
+
+		if (!shifted && y >= presentMap.floor.getY() - HEIGHT) {
+			onGround = true;
+		} else if (shifted && y >= pastMap.floor.getY() - HEIGHT) {
+			onGround = true;
+		} else {
+			onGround = false;
+		}
+
 		if (InputHandler.keys[InputHandler.A]) this.moveLeft();
 		if (InputHandler.keys[InputHandler.D]) this.moveRight();
-		if (InputHandler.keys[InputHandler.SPACE]) this.jump();
-		if (InputHandler.keys[InputHandler.SHIFT]) this.shift();
+		if (InputHandler.keys[InputHandler.SPACE] && !InputHandler.oldKeys[InputHandler.SPACE]) this.jump();
+		if (InputHandler.keys[InputHandler.SHIFT] && !InputHandler.oldKeys[InputHandler.SHIFT]) this.shift();
 
 		if (!onGround) {
 			y += velY;
 			velY += accelY;
 		}
-
 		x += velX;
 	}
 
@@ -46,7 +51,7 @@ public class Player extends GameObject {
 		g.setColor(Color.BLACK);
 		g.fillRect(x, y, WIDTH, HEIGHT);
 	}
-	
+
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
@@ -57,6 +62,11 @@ public class Player extends GameObject {
 		} else {
 			velX = -4;
 		}
+
+		if (!shifted && x >= presentMap.pillar.getX() + presentMap.pillar.getWidth()
+				&& x <= presentMap.pillar.getX() + presentMap.pillar.getWidth()) {
+			velX = 0;
+		}
 	}
 
 	private void moveRight() {
@@ -64,6 +74,10 @@ public class Player extends GameObject {
 			velX = 0;
 		} else {
 			velX = 4;
+		}
+
+		if (!shifted && x <= presentMap.pillar.getX() - WIDTH && x >= presentMap.pillar.getX() - WIDTH) {
+			velX = 0;
 		}
 	}
 
@@ -73,34 +87,32 @@ public class Player extends GameObject {
 			onGround = false;
 		}
 	}
-	
+
 	private void shift() {
-		if(!shifted) {
-			shifted = true;
-		} else {
-			shifted = false;
-		}
-		
-		if(!shifted) {
-			for(int i = 0; i < objectHandler.objectList.size(); i++) {
-				GameObject tempObject = objectHandler.objectList.get(i);
-				
-				if(tempObject.getID() == ObjectID.PRESENT_MAP) {
-					objectHandler.removeObject(tempObject);
+		if (!this.getBounds().intersects(presentMap.pillar.getBounds())) {
+			if (!shifted) {
+				for (int i = 0; i < objectHandler.objectList.size(); i++) {
+					GameObject tempObject = objectHandler.objectList.get(i);
+
+					if (tempObject.getID() == ObjectID.PRESENT_MAP) {
+						objectHandler.removeObject(tempObject);
+					}
 				}
-			}
-			
-			objectHandler.addObject(pastMap);
-		} else {
-			for(int i = 0; i < objectHandler.objectList.size(); i++) {
-				GameObject tempObject = objectHandler.objectList.get(i);
-				
-				if(tempObject.getID() == ObjectID.PAST_MAP) {
-					objectHandler.removeObject(tempObject);
+				objectHandler.addObject(pastMap);
+
+				shifted = true;
+			} else {
+				for (int i = 0; i < objectHandler.objectList.size(); i++) {
+					GameObject tempObject = objectHandler.objectList.get(i);
+
+					if (tempObject.getID() == ObjectID.PAST_MAP) {
+						objectHandler.removeObject(tempObject);
+					}
 				}
+				objectHandler.addObject(presentMap);
+
+				shifted = false;
 			}
-			
-			objectHandler.addObject(presentMap);
 		}
 	}
 }

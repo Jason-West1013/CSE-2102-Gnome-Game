@@ -12,12 +12,12 @@ public class OptionMenu extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setBounds(100, 100, 450, 232);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
 		setUndecorated(true);
 		setVisible(true);
-		
      }
-
 }

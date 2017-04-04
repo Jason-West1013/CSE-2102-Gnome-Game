@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import Graphics.SpriteSheet;
-import Input.InputHandler;
 
 public class Goblin extends GameObject {
 	public static final int MAX_LEFT_TRAVEL = 40, MAX_RIGHT_TRAVEL = 520, WIDTH = 5, HEIGHT = 32;
@@ -16,21 +15,11 @@ public class Goblin extends GameObject {
 
 	public Goblin(int x, int y, ObjectID id, Player player) {
 		super(x, y, id);
-		velX = 0;
-		velY = 0;
+
 		_player = player;
-	}
-	
-	public int getHeight() {
-		return HEIGHT;
-	}
-	
-	public int getWidth() {
-		return WIDTH;
 	}
 
 	public void update() {
-		//move = false;
 		velX = 0;
 
 		if (y >= 300) {
@@ -39,7 +28,6 @@ public class Goblin extends GameObject {
 
 		this.goblinAI();
 		this.checkCollision();
-		
 
 		if (move) {
 			frame++;
@@ -60,23 +48,25 @@ public class Goblin extends GameObject {
 			if (dir == 0) {
 				g.drawImage(SpriteSheet.playerOne[3][0], x, y - 64, null);
 				g.drawImage(SpriteSheet.playerOne[3][1], x, y, null);
-			}
-			else if (dir == 1) {
-				g.drawImage(SpriteSheet.playerTwo[3][0], x, y  - 64, null);
+			} else if (dir == 1) {
+				g.drawImage(SpriteSheet.playerTwo[3][0], x, y - 64, null);
 				g.drawImage(SpriteSheet.playerTwo[3][1], x, y, null);
 			}
 		} else {
 			int stepFrame = 2 + (frame / 4) % 2;
-			
+
 			if (dir == 0) {
 				g.drawImage(SpriteSheet.playerOne[stepFrame][0], x, y - 64, null);
 				g.drawImage(SpriteSheet.playerOne[stepFrame][1], x, y, null);
-			}
-			else if (dir == 1) {
+			} else if (dir == 1) {
 				g.drawImage(SpriteSheet.playerTwo[stepFrame][0], x, y - 64, null);
 				g.drawImage(SpriteSheet.playerTwo[stepFrame][1], x, y, null);
 			}
 		}
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 
 	private void moveLeft() {
@@ -88,9 +78,8 @@ public class Goblin extends GameObject {
 		} else {
 			velX = -1;
 		}
-		
-		if(_collPlayer)
-			velX = 0;
+
+		if (_collPlayer) velX = 0;
 	}
 
 	private void moveRight() {
@@ -102,26 +91,24 @@ public class Goblin extends GameObject {
 		} else {
 			velX = 1;
 		}
-		
-		if(_collPlayer) 
-			velX = 0;
+
+		if (_collPlayer) velX = 0;
 	}
-	
+
 	private void standStill() {
 		move = false;
 		velX = 0;
 	}
-	
+
 	public void goblinAI() {
-		if(getX() == MAX_LEFT_TRAVEL && _player.getX() < getX() || getX() == MAX_RIGHT_TRAVEL && 
-				_player.getX() > getX() || _collPlayer == true)
+		if (getX() == MAX_LEFT_TRAVEL && _player.getX() < x || x == MAX_RIGHT_TRAVEL && _player.getX() > x || _collPlayer == true) {
 			standStill();
-		else if(_player.getX() < getX())
+		} else if (_player.getX() < getX()) {
 			moveLeft();
-		else if(_player.getX() > getX())
+		} else if (_player.getX() > getX()) {
 			moveRight();
+		}
 	}
-	
 
 	public void checkCollision() {
 	}

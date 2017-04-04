@@ -12,17 +12,17 @@ import javax.swing.border.EmptyBorder;
 import Main.Window;
 
 public class InGameOptionMenu extends JFrame{
+	private static final long serialVersionUID = 1L;
 	
-	JPanel contentPane;
-	JButton btnResume;
-	JButton btnOptions;
-	JButton btnExit;
-	Window window;
-	
-	private static final long serialVersionUID = 4647382187656153388L;
+	private JButton btnResume;
+	private JButton btnOptions;
+	private JButton btnExit;
+	private JPanel contentPane;
+	private Window window;
 	
 	public InGameOptionMenu(Window window){
 		this.window = window;
+		
 		initComponents();
 		createEvents();
 	}
@@ -31,10 +31,11 @@ public class InGameOptionMenu extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setBounds(100, 100, 450, 232);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(3, 1));
+		setContentPane(contentPane);
 		
 		btnResume = new JButton("Resume");
 		contentPane.add(btnResume);
