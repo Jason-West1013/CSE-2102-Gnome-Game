@@ -27,8 +27,16 @@ public class Background {
 	private double _dy;
 
 	private double _moveScale;
+	
+	public Background(String file) {
+		try {
+			_image = ImageIO.read(Background.class.getResource(file)); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-	public Background(String file, double moveScale, Player player) {
+	/*public Background(String file, double moveScale, Player player) {
 		try {
 			_image = ImageIO.read(Background.class.getResource(file)); 
 			_moveScale = moveScale;
@@ -36,7 +44,7 @@ public class Background {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**********************************************************
 	 * Sets the speed at which the background image will scroll 
@@ -54,8 +62,8 @@ public class Background {
 		_x += _dx;
 		_y += _dy;
 
-		if ((InputHandler.keys[InputHandler.A] == true) && (_player.getX() == Player.MAX_LEFT_TRAVEL)) _x += _moveScale;
-		if ((InputHandler.keys[InputHandler.D] == true) && (_player.getX() == Player.MAX_RIGHT_TRAVEL)) _x -= _moveScale;
+		//if ((InputHandler.keys[InputHandler.A] == true) && (_player.getX() <= Player.MAX_LEFT_TRAVEL)) _x += _moveScale;
+		//if ((InputHandler.keys[InputHandler.D] == true) && (_player.getX() >= Player.MAX_RIGHT_TRAVEL)) _x -= _moveScale;
 	}
 
 	/**********************************************************

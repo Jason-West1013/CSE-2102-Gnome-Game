@@ -4,14 +4,16 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import GameState.GameStateManager;
+import Graphics.SpriteSheet;
 import Input.InputHandler;
 
 public class Player extends GameObject {
-	public static final int MAX_LEFT_TRAVEL = 40, MAX_RIGHT_TRAVEL = 340;
+	public static final int MAX_LEFT_TRAVEL = -20, MAX_RIGHT_TRAVEL = 585, WIDTH = 32, HEIGHT = 32;
 
 	private int accelY = 1;
 	public boolean onGround = true;
-	
+
 	public Player(int x, int y, ObjectID id) {
 		super(x, y, id);
 		
@@ -46,7 +48,7 @@ public class Player extends GameObject {
 	}
 
 	private void moveLeft() {
-		if (x == MAX_LEFT_TRAVEL) {
+		if (x <= MAX_LEFT_TRAVEL) {
 			velX = 0;
 		} else {
 			velX = -4;
@@ -54,7 +56,7 @@ public class Player extends GameObject {
 	}
 
 	private void moveRight() {
-		if (x == MAX_RIGHT_TRAVEL) {
+		if (x >= MAX_RIGHT_TRAVEL) {
 			velX = 0;
 		} else {
 			velX = 4;
@@ -63,8 +65,7 @@ public class Player extends GameObject {
 
 	private void jump() {
 		if (onGround) {
-			velY = -15;
-
+			velY = -10;
 			onGround = false;
 		}
 	}

@@ -3,17 +3,25 @@ package Main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 import java.awt.image.BufferStrategy;
 
+import GameState.GameStateManager;
 import Graphics.Background;
 import Input.InputHandler;
 import Objects.ObjectHandler;
 import Objects.ObjectID;
 import Objects.Player;
-import Objects.PresentMap;
 
-public class Game extends Canvas implements Runnable {
-	private static final long serialVersionUID = 1L;
+import Objects.PresentMap;
+import View.InGameOptionMenu;
+
+public class Game extends Canvas implements Runnable{
 	public static final int WIDTH = 640, HEIGHT = 480;
 
 	private Thread thread;
@@ -29,11 +37,10 @@ public class Game extends Canvas implements Runnable {
 
 		objectHandler = new ObjectHandler();
 
-		bg = new Background("/Sky.gif", 0.3, player);
+		bg = new Background("/Sky.gif");
 		bg.setAutoScroll(-0.05, 0);
-		moon = new Background("/Moon.gif", 0.3, player);
-		moon.setAutoScroll(-0.05, 0);
-		cloud = new Background("/Clouds.gif", 1, player);
+		moon = new Background("/Moon.gif");
+		cloud = new Background("/Clouds.gif");
 		cloud.setAutoScroll(-0.1, 0);
 
 		new Window(WIDTH, HEIGHT, "Swordman", this);
@@ -43,7 +50,7 @@ public class Game extends Canvas implements Runnable {
 
 		this.addKeyListener(new InputHandler());
 		this.requestFocus();
-	}
+	}	
 
 	public synchronized void start() {
 		running = true;
@@ -124,7 +131,7 @@ public class Game extends Canvas implements Runnable {
 		g.dispose();
 		bs.show();
 	}
-
+	
 	public static void main(String[] args) {
 		new Game();
 	}
