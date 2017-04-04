@@ -25,5 +25,6 @@ public class Tile extends GameObject {
 	}
 
 	public void detectCollision(Player player, Tile tile) {
+		
 	}
 }

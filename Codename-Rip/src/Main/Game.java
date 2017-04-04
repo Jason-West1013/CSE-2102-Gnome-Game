@@ -7,7 +7,6 @@ import java.awt.image.BufferStrategy;
 
 import Graphics.Background;
 import Input.InputHandler;
-import Objects.Goblin;
 import Objects.Map;
 import Objects.ObjectHandler;
 import Objects.ObjectID;
@@ -19,7 +18,6 @@ public class Game extends Canvas implements Runnable {
 
 	private Thread thread;
 	private Player player;
-	private Goblin goblin;
 
 	private boolean running = false;
 

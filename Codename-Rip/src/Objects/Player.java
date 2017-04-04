@@ -12,8 +12,6 @@ public class Player extends GameObject {
 	private int accelY = 1;
 	public boolean onGround = true;
 	
-	Tile tile;
-
 	public Player(int x, int y, ObjectID id) {
 		super(x, y, id);
 		
@@ -67,8 +65,5 @@ public class Player extends GameObject {
 
 			onGround = false;
 		}
-	}
-
-	public void doCollision(Player player, Tile tile) {
 	}
 }
