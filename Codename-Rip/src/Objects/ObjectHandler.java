@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 public class ObjectHandler {
-	private LinkedList<GameObject> objectList = new LinkedList<GameObject>();
+	public LinkedList<GameObject> objectList = new LinkedList<GameObject>();
 
 	public void update() {
 		for (int i = 0; i < objectList.size(); i++) {

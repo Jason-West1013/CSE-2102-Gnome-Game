@@ -1,5 +1,5 @@
 package Objects;
 
 public enum ObjectID {
-	PLAYER, GOBLIN, MAP, TILE;
+	PLAYER, GOBLIN, PRESENT_MAP, PAST_MAP;
 }

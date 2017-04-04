@@ -4,11 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class PresentMap extends GameObject {
+public class PastMap extends GameObject {
 	Rectangle floor = new Rectangle(0, 376, 635, 64);
-	Rectangle pillar = new Rectangle(300, 0, 64, 376);
-	
-	public PresentMap(int x, int y, ObjectID id) {
+
+	public PastMap(int x, int y, ObjectID id) {
 		super(x, y, id);
 	}
 
@@ -17,9 +16,8 @@ public class PresentMap extends GameObject {
 	}
 
 	public void render(Graphics2D g) {
-		g.setColor(Color.GREEN);
+		g.setColor(Color.RED);
 		
 		g.fill(floor);
-		g.fill(pillar);
 	}
 }

@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class GameMainMenu extends JFrame {	
+	private static final long serialVersionUID = 1L;
+
 	private JLabel lblTitle;
 	
 	private JButton btnNewGame;
@@ -20,10 +22,6 @@ public class GameMainMenu extends JFrame {
 	private JButton btnHelp;
 	private JButton btnAbout;
 	private JButton btnExit;
-	/**
-	 * Launch the application.
-	 */
-	private static final long serialVersionUID1 = 1L;
 	private JPanel contentPane;
 
 	public static void main(String[] args) {
