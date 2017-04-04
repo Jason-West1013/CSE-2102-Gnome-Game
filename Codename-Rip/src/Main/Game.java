@@ -7,10 +7,10 @@ import java.awt.image.BufferStrategy;
 
 import Graphics.Background;
 import Input.InputHandler;
-import Objects.Map;
 import Objects.ObjectHandler;
 import Objects.ObjectID;
 import Objects.Player;
+import Objects.PresentMap;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
 	private Background bg, cloud, moon;
 
 	public Game() {
-		player = new Player(100, 320, ObjectID.PLAYER);
+		player = new Player(100, 344, ObjectID.PLAYER);
 
 		objectHandler = new ObjectHandler();
 
@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
-		objectHandler.addObject(new Map(0, 0, ObjectID.MAP, player));
+		objectHandler.addObject(new PresentMap(0, 0, ObjectID.MAP));
 		objectHandler.addObject(player);
 
 		this.addKeyListener(new InputHandler());

@@ -36,11 +36,11 @@ public class Player extends GameObject {
 
 	public void render(Graphics2D g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(x, y, 64, 64);
+		g.fillRect(x, y, 32, 32);
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x,y, 64, 64);
+		return new Rectangle(x, y, 32, 32);
 	}
 
 	private void moveLeft() {
