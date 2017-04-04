@@ -40,9 +40,6 @@ public class Goblin extends GameObject {
 		this.goblinAI();
 		this.checkCollision();
 		
-		//if (InputHandler.keys[InputHandler.A]) this.moveRight();
-		//if (InputHandler.keys[InputHandler.D]) this.moveLeft();
-		//if (InputHandler.keys[InputHandler.SPACE]) this.jump();
 
 		if (move) {
 			frame++;
@@ -122,19 +119,10 @@ public class Goblin extends GameObject {
 		}
 	}
 	
-	/*****************************************
-	 * Returns a rectangle instance to surround
-	 * the sprite.
-	 *****************************************/
 	private Rectangle getBounds() {
 		return new Rectangle(x + 15, y, WIDTH, HEIGHT);
 	}
 	
-	/*****************************************
-	 * Rough AI method the goblin just always
-	 * walks towards the player. Currently setup 
-	 * to test health system.
-	 *****************************************/
 	public void goblinAI() {
 		if(getX() == MAX_LEFT_TRAVEL && _player.getX() < getX() || getX() == MAX_RIGHT_TRAVEL && 
 				_player.getX() > getX() || _collPlayer == true)
@@ -145,21 +133,7 @@ public class Goblin extends GameObject {
 			moveRight();
 	}
 	
-	/*****************************************
-	 * Checks the collision between the player
-	 * and the goblin. Moves player outside of 
-	 * bounds if a collision is detected.
-	 *****************************************/
+
 	public void checkCollision() {
-		if(this.getBounds().intersects(_player.getBounds())) {
-			_collPlayer = true;
-			_player.damage();
-			if(_player.getDir() == 1) {// If player is on the right.
-				_player.setX(_player.getX() + this.WIDTH);
-			} else if(_player.getDir() == 0) {// If player is on the left.
-				_player.setX(_player.getX() - this.WIDTH);
-			}
-		} else
-			_collPlayer = false;
 	}
 }
