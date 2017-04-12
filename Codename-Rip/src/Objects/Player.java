@@ -3,14 +3,19 @@ package Objects;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
+import Graphics.SpriteSheet;
 import Input.InputHandler;
 
 public class Player extends GameObject {
 	public static final int MAX_LEFT_TRAVEL = 0, MAX_RIGHT_TRAVEL = 601, WIDTH = 32, HEIGHT = 32;
-
-	private int accelY = 1;
-	private boolean onGround = true, shifted = false;
+	private int accelY = 1, frame = 0, dir = 0;
+	private boolean onGround = true, move = false;
+	private Player _player;
+	private boolean _collPlayer = false;
+private boolean shifted = false;
+	
 
 	private ObjectHandler objectHandler;
 	private PastMap pastMap;
@@ -26,7 +31,15 @@ public class Player extends GameObject {
 
 	public void update() {
 		velX = 0;
+		if (move) {
+			frame++;
+		} else {
+			frame = 0;
+		}
 
+		if (velX == 0) {
+		move = false;
+		}
 		if (!shifted && y >= presentMap.floor.getY() - HEIGHT) {
 			onGround = true;
 		} else if (shifted && y >= pastMap.floor.getY() - HEIGHT) {
@@ -42,16 +55,28 @@ public class Player extends GameObject {
 
 		if (!onGround) {
 			y += velY;
-			velY += accelY;
+			velY ++ ;
 		}
 		x += velX;
 	}
 
 	public void render(Graphics2D g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(x, y, WIDTH, HEIGHT);
-	}
+		if (!onGround) {
+			if (dir == 0) {
+				g.drawImage(SpriteSheet.playerOne[0][0], x, y-32, null);
+			} else if (dir == 1) {
+				g.drawImage(SpriteSheet.playerTwo[0][0], x-32, y-32, null);
+			}
+		} else {
+			int stepFrame = (frame / 2) % 2;
 
+			if (dir == 0) {
+				g.drawImage(SpriteSheet.playerOne[stepFrame][0], x, y-32, null);				
+			} else if (dir == 1) {
+				g.drawImage(SpriteSheet.playerTwo[stepFrame][0], x-32, y-32, null);				
+			}
+		}
+	}
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
@@ -59,8 +84,12 @@ public class Player extends GameObject {
 	private void moveLeft() {
 		if (x <= MAX_LEFT_TRAVEL) {
 			velX = 0;
+			dir = 1;
+			move = false;
 		} else {
+			move = true;
 			velX = -4;
+			dir = 1;
 		}
 
 		if (!shifted && x >= presentMap.pillar.getX() + presentMap.pillar.getWidth()
@@ -72,8 +101,12 @@ public class Player extends GameObject {
 	private void moveRight() {
 		if (x >= MAX_RIGHT_TRAVEL) {
 			velX = 0;
+			dir = 0;
+			move = false;
 		} else {
+			move = true;
 			velX = 4;
+			dir = 0;
 		}
 
 		if (!shifted && x <= presentMap.pillar.getX() - WIDTH && x >= presentMap.pillar.getX() - WIDTH) {
