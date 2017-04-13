@@ -13,40 +13,36 @@ import Objects.PastMap;
 import Objects.Player;
 import Objects.PresentMap;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	public static final int WIDTH = 640, HEIGHT = 480;
 
-	private Thread thread;
-	private Player player;
-
 	private boolean running = false;
 
-	private ObjectHandler objectHandler;
 	private Background bg, cloud, moon;
+	private InputHandler inputHandler = new InputHandler();
+	private ObjectHandler objectHandler = new ObjectHandler();
 	private PresentMap presentMap = new PresentMap(0, 0, ObjectID.PRESENT_MAP);
 	private PastMap pastMap = new PastMap(0, 0, ObjectID.PAST_MAP);
+	private Player player = new Player(100, 344, ObjectID.PLAYER, objectHandler, pastMap, presentMap);
+	private Thread thread;
 
 	public Game() {
-		objectHandler = new ObjectHandler();
-
-		player = new Player(100, 344, ObjectID.PLAYER, objectHandler, presentMap, pastMap);
-		
 		bg = new Background("/Sky.gif");
 		moon = new Background("/Moon.gif");
 		cloud = new Background("/Clouds.gif");
 		cloud.setAutoScroll(-0.08, 0);
 		
 
-		new Window(WIDTH, HEIGHT, "Swordman", this);
+		new Window(WIDTH, HEIGHT, "Shift", this);
 
 		objectHandler.addObject(presentMap);
 		objectHandler.addObject(player);
 
-		this.addKeyListener(new InputHandler());
+		this.addKeyListener(inputHandler);
 		this.requestFocus();
-	}	
+	}
 
 	public synchronized void start() {
 		running = true;
@@ -105,6 +101,7 @@ public class Game extends Canvas implements Runnable{
 		moon.update();
 		cloud.update();
 		objectHandler.update();
+		inputHandler.update();
 	}
 
 	public void render() {
@@ -127,7 +124,7 @@ public class Game extends Canvas implements Runnable{
 		g.dispose();
 		bs.show();
 	}
-	
+
 	public static void main(String[] args) {
 		new Game();
 	}

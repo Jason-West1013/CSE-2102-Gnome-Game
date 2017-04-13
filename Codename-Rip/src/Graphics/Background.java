@@ -1,13 +1,10 @@
 package Graphics;
 
 import Main.Game;
-import Objects.Player;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-
-import Input.InputHandler;
 
 /**********************************************************
  * Draws a background image. Can be scrolled based on the
@@ -16,7 +13,6 @@ import Input.InputHandler;
 public class Background {
 
 	private BufferedImage _image;
-	private Player _player;
 
 	// Scrolling speed
 	private double _x;
@@ -25,8 +21,6 @@ public class Background {
 	// Automatic scroll speed.
 	private double _dx; 
 	private double _dy;
-
-	private double _moveScale;
 	
 	public Background(String file) {
 		try {
