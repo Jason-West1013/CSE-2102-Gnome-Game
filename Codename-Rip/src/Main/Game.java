@@ -37,6 +37,7 @@ public class Game extends Canvas implements Runnable{
 		moon = new Background("/Moon.gif");
 		cloud = new Background("/Clouds.gif");
 		cloud.setAutoScroll(-0.08, 0);
+		
 
 		new Window(WIDTH, HEIGHT, "Swordman", this);
 
