@@ -19,7 +19,7 @@ public class PresentMap extends GameObject {
 
 	public void render(Graphics2D g) {
 		g.drawImage(SpriteSheet.floor,0,375,null);
-		g.drawImage(SpriteSheet.pillar,280,175,null);
+		g.drawImage(SpriteSheet.pillar,282,175,null);
 		g.setColor(Color.GREEN);
 	}
 }
