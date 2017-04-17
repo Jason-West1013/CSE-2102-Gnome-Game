@@ -18,7 +18,7 @@ public class PastMap extends GameObject {
 
 	public void render(Graphics2D g) {
 		g.drawImage(SpriteSheet.floor,0,375,null);
-		g.drawImage(SpriteSheet.sprout,310,355,null);
+		g.drawImage(SpriteSheet.sprout,305,355,null);
 		g.setColor(Color.RED);
 	}
 }
