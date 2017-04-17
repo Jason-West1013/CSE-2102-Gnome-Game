@@ -10,6 +10,9 @@ public class SpriteSheet {
 	public static BufferedImage[][] playerOne = split(scale(load("/SpriteSheet.png"), 2), 64, 64);
 	public static BufferedImage[][] playerTwo = mirrorSplit(scale(load("/SpriteSheet.png"), 2), 64, 64);
 	public static BufferedImage[][] tiles = split(scale(load("/Tiles.png"), 2), 64, 64);
+	public static BufferedImage floor = load("/GroundFull.gif");
+	public static BufferedImage pillar = load("/Tree64.gif");
+	public static BufferedImage sprout = load("/sprout64.gif");
 	
 	public static BufferedImage map = load("/Map.png");
 
